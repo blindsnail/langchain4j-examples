@@ -4,8 +4,6 @@ import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.AiServices;
 
-import static dev.langchain4j.model.openai.OpenAiChatModelName.GPT_4_O_MINI;
-
 public class _10_ServiceWithToolsExample {
 
     // Please also check CustomerSupportApplication and CustomerSupportApplicationTest
@@ -40,8 +38,9 @@ public class _10_ServiceWithToolsExample {
     public static void main(String[] args) {
 
         ChatModel model = OpenAiChatModel.builder()
-                .apiKey(ApiKeys.OPENAI_API_KEY) // WARNING! Tools are not supported with "demo" API key
-                .modelName(GPT_4_O_MINI)
+                .baseUrl("https://api.deepseek.com/v1") // 关键：指向 DeepSeek 的 API
+                .apiKey(ApiKeys.DEEPSEEK_API_KEY)
+                .modelName("deepseek-flash")
                 .strictTools(true) // https://docs.langchain4j.dev/integrations/language-models/open-ai#structured-outputs-for-tools
                 .build();
 

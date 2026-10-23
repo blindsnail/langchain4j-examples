@@ -9,8 +9,9 @@ public class ChatModelProvider {
     
     public static ChatModel createChatModel() {
         return OpenAiChatModel.builder()
-                .apiKey(System.getenv("OPENAI_API_KEY"))
-                .modelName(GPT_4_O_MINI)
+                .baseUrl("https://api.deepseek.com/v1") // 关键：指向 DeepSeek 的 API
+                .apiKey(System.getenv("DEEPSEEK_API_KEY"))
+                .modelName("deepseek-flash")
                 .logRequests(true)
                 .logResponses(true)
                 .build();

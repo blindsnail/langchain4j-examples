@@ -22,9 +22,9 @@ public class _1a_Basic_Agent_Example {
      */
 
     // Set logging level
-    static {
-        CustomLogging.setLevel(LogLevels.PRETTY, 300);  // control how much you see from the model calls
-    }
+//    static {
+//        CustomLogging.setLevel(LogLevels.PRETTY, 300);  // control how much you see from the model calls
+//    }
 
     // 1. Define the model that will power the agent
     private static final ChatModel CHAT_MODEL = ChatModelProvider.createChatModel();

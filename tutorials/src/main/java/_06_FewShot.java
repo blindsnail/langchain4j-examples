@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import static dev.langchain4j.model.openai.OpenAiChatModelName.GPT_4_O_MINI;
 import static java.time.Duration.ofSeconds;
 
 public class _06_FewShot {
@@ -17,8 +16,9 @@ public class _06_FewShot {
     public static void main(String[] args) {
 
         OpenAiStreamingChatModel model = OpenAiStreamingChatModel.builder()
-                .apiKey(ApiKeys.OPENAI_API_KEY)
-                .modelName(GPT_4_O_MINI)
+                .baseUrl("https://api.deepseek.com/v1") // 关键：指向 DeepSeek 的 API
+                .apiKey(ApiKeys.DEEPSEEK_API_KEY)
+                .modelName("deepseek-flash")
                 .timeout(ofSeconds(100))
                 .build();
 

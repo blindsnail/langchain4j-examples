@@ -35,8 +35,9 @@ class _05_Advanced_RAG_with_Metadata_Filtering_Examples {
      */
 
     ChatModel chatModel = OpenAiChatModel.builder()
-            .apiKey(Utils.OPENAI_API_KEY)
-            .modelName(GPT_4_O_MINI)
+            .baseUrl("https://api.deepseek.com/v1") // 关键：指向 DeepSeek 的 API
+            .apiKey(System.getenv("DEEPSEEK_API_KEY"))
+            .modelName("deepseek-flash")
             .build();
 
     EmbeddingModel embeddingModel = new BgeSmallEnV15QuantizedEmbeddingModel();

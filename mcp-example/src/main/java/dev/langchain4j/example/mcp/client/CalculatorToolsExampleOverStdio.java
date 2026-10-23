@@ -1,4 +1,4 @@
-package dev.langchain4j.example.mcp;
+package dev.langchain4j.example.mcp.client;
 
 import dev.langchain4j.mcp.McpToolProvider;
 import dev.langchain4j.mcp.client.DefaultMcpClient;
@@ -13,7 +13,7 @@ import dev.langchain4j.service.tool.ToolProvider;
 import java.io.File;
 import java.util.List;
 
-public class McpToolsExampleOverStdio {
+public class CalculatorToolsExampleOverStdio {
 
     // We will let the AI read the contents of this file
     public static final String FILE_TO_BE_READ = "src/main/resources/file.txt";
@@ -39,14 +39,15 @@ public class McpToolsExampleOverStdio {
     public static void main(String[] args) throws Exception {
 
         ChatModel model = OpenAiChatModel.builder()
-                .apiKey(System.getenv("OPENAI_API_KEY"))
-                .modelName("gpt-4o-mini")
+                .baseUrl("https://api.deepseek.com/v1") // 关键：指向 DeepSeek 的 API
+                .apiKey(System.getenv("DEEPSEEK_API_KEY"))
+                .modelName("deepseek-flash")
 //                .logRequests(true)
 //                .logResponses(true)
                 .build();
 
         McpTransport transport = new StdioMcpTransport.Builder()
-                .command(List.of("/usr/bin/npm", "exec",
+                .command(List.of("/opt/homebrew/bin/npm", "exec",
                         "@modelcontextprotocol/server-filesystem@0.6.2",
                         // allowed directory for the server to interact with
                         new File("src/main/resources").getAbsolutePath()

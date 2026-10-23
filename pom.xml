@@ -9,6 +9,47 @@
     <version>1.22.0-beta32</version>
     <packaging>pom</packaging>
 
+    <properties>
+        <!-- The single place where the LangChain4j versions of this repository are defined -->
+        <langchain4j.version>1.22.0</langchain4j.version>
+        <langchain4j-community.version>1.22.0-beta32</langchain4j-community.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>dev.langchain4j</groupId>
+                <artifactId>langchain4j-bom</artifactId>
+                <version>${langchain4j.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>dev.langchain4j</groupId>
+                <artifactId>langchain4j-community-bom</artifactId>
+                <version>${langchain4j-community.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Artifacts that are not part of the BOMs above -->
+            <dependency>
+                <groupId>dev.langchain4j</groupId>
+                <artifactId>langchain4j-redis</artifactId>
+                <version>1.0.0-alpha1</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.langchain4j</groupId>
+                <artifactId>langchain4j-community-jvector</artifactId>
+                <version>${langchain4j-community.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.langchain4j</groupId>
+                <artifactId>langchain4j-community-yugabytedb</artifactId>
+                <version>${langchain4j-community.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <modules>
         <module>agentic-tutorial</module>
         <module>anthropic-examples</module>
@@ -47,6 +88,7 @@
         <module>quarkus-example</module>
         <module>rag-examples</module>
         <module>redis-example</module>
+        <module>shared</module>
         <module>spring-boot4-example</module>
         <module>spring-boot-example</module>
         <module>tutorials</module>
@@ -59,6 +101,8 @@
         <module>jvector-example</module>
         <module>s3-vectors-example</module>
         <module>yugabytedb-example</module>
+        <module>decision-model-example</module>
+        <module>a2a-server</module>
+        <module>a2a</module>
     </modules>
-
 </project>

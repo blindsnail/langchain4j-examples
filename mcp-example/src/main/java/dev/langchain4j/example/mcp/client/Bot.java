@@ -1,4 +1,4 @@
-package dev.langchain4j.example.mcp;
+package dev.langchain4j.example.mcp.client;
 
 public interface Bot {
 

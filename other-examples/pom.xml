@@ -4,6 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>dev.langchain4j</groupId>
+        <artifactId>langchain4j-examples</artifactId>
+        <version>1.22.0-beta32</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
     <groupId>dev.langchain4j</groupId>
     <artifactId>other-examples</artifactId>
     <version>1.22.0-beta32</version>
@@ -19,49 +26,41 @@
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j</artifactId>
-            <version>1.22.0</version>
         </dependency>
 
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-open-ai</artifactId>
-            <version>1.22.0</version>
         </dependency>
 
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-hugging-face</artifactId>
-            <version>1.22.0-beta32</version>
         </dependency>
 
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-vertex-ai</artifactId>
-            <version>1.22.0-beta32</version>
         </dependency>
 
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-embeddings</artifactId>
-            <version>1.22.0-beta32</version>
         </dependency>
 
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-embeddings-all-minilm-l6-v2</artifactId>
-            <version>1.22.0-beta32</version>
         </dependency>
 
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-document-parser-apache-tika</artifactId>
-            <version>1.22.0-beta32</version>
         </dependency>
 
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-code-execution-engine-judge0</artifactId>
-            <version>1.22.0-beta32</version>
         </dependency>
 
         <dependency>
@@ -83,5 +82,4 @@
         </dependency>
 
     </dependencies>
-
 </project>

@@ -1,25 +1,28 @@
+import dev.langchain4j.examples.shared.DeepSeekTokenCountEstimator;
+import dev.langchain4j.model.chat.StreamingChatModel;
 import dev.langchain4j.model.chat.response.ChatResponse;
 import dev.langchain4j.model.chat.response.StreamingChatResponseHandler;
 import dev.langchain4j.model.openai.OpenAiStreamingChatModel;
-import dev.langchain4j.model.openai.OpenAiTokenCountEstimator;
 
 import java.util.concurrent.CompletableFuture;
-
-import static dev.langchain4j.model.openai.OpenAiChatModelName.GPT_4_O_MINI;
 
 public class _04_Streaming {
 
     public static void main(String[] args) {
 
-        OpenAiStreamingChatModel model = OpenAiStreamingChatModel.builder()
-                .apiKey(ApiKeys.OPENAI_API_KEY)
-                .modelName(GPT_4_O_MINI)
+        StreamingChatModel model = OpenAiStreamingChatModel.builder()
+                .baseUrl("https://api.deepseek.com/v1") // 关键：指向 DeepSeek 的 API
+                .apiKey(ApiKeys.DEEPSEEK_API_KEY)
+                .modelName("deepseek-flash")
+                .logRequests(true)
+                .logResponses(true)
                 .build();
 
         String prompt = "Write a short funny poem about developers and null-pointers, 10 lines maximum";
 
         System.out.println("Nr of chars: " + prompt.length());
-        System.out.println("Nr of tokens: " + new OpenAiTokenCountEstimator(GPT_4_O_MINI).estimateTokenCountInText(prompt));
+        System.out.println("Estimated nr of tokens: "
+                + new DeepSeekTokenCountEstimator().estimateTokenCountInText(prompt));
 
         CompletableFuture<ChatResponse> futureChatResponse = new CompletableFuture<>();
 

@@ -1,5 +1,6 @@
-package dev.langchain4j.example.mcp;
+package dev.langchain4j.example.mcp.client;
 
+import dev.langchain4j.agent.tool.ToolSpecification;
 import dev.langchain4j.mcp.McpToolProvider;
 import dev.langchain4j.mcp.client.DefaultMcpClient;
 import dev.langchain4j.mcp.client.McpClient;
@@ -13,31 +14,18 @@ import dev.langchain4j.service.tool.ToolProvider;
 import java.time.Duration;
 import java.util.List;
 
-public class McpToolsExampleOverHttp {
-
-    /**
-     * This example uses the `server-everything` MCP server that showcases some aspects of the MCP protocol.
-     * In particular, we use its 'add' tool that adds two numbers.
-     * <p>
-     * Before running this example, you need to start the `everything` server in streamable HTTP mode on localhost:3001.
-     * Check out https://github.com/modelcontextprotocol/servers/tree/main/src/everything
-     * and run `npm install` and `node dist/streamableHttp.js`.
-     * <p>
-     * Of course, feel free to swap out the server with any other MCP server.
-     * <p>
-     * Run the example and check the logs to verify that the model used the tool.
-     */
-    public static void main(String[] args) throws Exception {
-
+public class WeatherToolsExample {
+    public static void main(String[] args) {
         ChatModel model = OpenAiChatModel.builder()
-                .apiKey(System.getenv("OPENAI_API_KEY"))
-                .modelName("gpt-4o-mini")
+                .baseUrl("https://api.deepseek.com/v1") // 关键：指向 DeepSeek 的 API
+                .apiKey(System.getenv("DEEPSEEK_API_KEY"))
+                .modelName("deepseek-flash")
                 .logRequests(true)
                 .logResponses(true)
                 .build();
 
         McpTransport transport = new StreamableHttpMcpTransport.Builder()
-                .url("http://localhost:3001/mcp")
+                .url("http://localhost:8080/mcp")
                 .timeout(Duration.ofSeconds(60))
                 .logRequests(true)
                 .logResponses(true)
@@ -47,6 +35,9 @@ public class McpToolsExampleOverHttp {
                 .transport(transport)
                 .build();
 
+        List<ToolSpecification> tools = mcpClient.listTools();
+        System.out.println("tools: " + tools);
+
         ToolProvider toolProvider = McpToolProvider.builder()
                 .mcpClients(List.of(mcpClient))
                 .build();
@@ -55,12 +46,11 @@ public class McpToolsExampleOverHttp {
                 .chatModel(model)
                 .toolProvider(toolProvider)
                 .build();
-        try {
-            String response = bot.chat("What is 5+12? Use the provided tool to answer " +
-                    "and always assume that the tool is correct.");
-            System.out.println(response);
-        } finally {
-            mcpClient.close();
-        }
+
+        String response = bot.chat("根据经纬度查询天气预报，经度：-122.3321，纬度：47.6062");
+        System.out.println(response);
+
+        response = bot.chat("查询加利福尼亚地区的警告");
+        System.out.println(response);
     }
 }

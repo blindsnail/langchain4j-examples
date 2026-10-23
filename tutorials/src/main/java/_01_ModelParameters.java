@@ -1,7 +1,6 @@
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 
-import static dev.langchain4j.model.openai.OpenAiChatModelName.GPT_4_O_MINI;
 import static java.time.Duration.ofSeconds;
 
 public class _01_ModelParameters {
@@ -11,8 +10,9 @@ public class _01_ModelParameters {
         // OpenAI parameters are explained here: https://platform.openai.com/docs/api-reference/chat/create
 
         ChatModel model = OpenAiChatModel.builder()
-                .apiKey(ApiKeys.OPENAI_API_KEY)
-                .modelName(GPT_4_O_MINI)
+                .baseUrl("https://api.deepseek.com/v1") // 关键：指向 DeepSeek 的 API
+                .apiKey(ApiKeys.DEEPSEEK_API_KEY)
+                .modelName("deepseek-flash")
                 .temperature(0.3)
                 .timeout(ofSeconds(60))
                 .logRequests(true)

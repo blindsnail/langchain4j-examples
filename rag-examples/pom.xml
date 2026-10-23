@@ -4,6 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>dev.langchain4j</groupId>
+        <artifactId>langchain4j-examples</artifactId>
+        <version>1.22.0-beta32</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
     <groupId>dev.langchain4j</groupId>
     <artifactId>rag-examples</artifactId>
     <version>1.22.0-beta32</version>
@@ -19,37 +26,36 @@
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j</artifactId>
-            <version>1.22.0</version>
         </dependency>
 
         <dependency>
             <groupId>dev.langchain4j</groupId>
-            <artifactId>langchain4j-easy-rag</artifactId>
-            <version>1.22.0-beta32</version>
+            <artifactId>langchain4j-core</artifactId>
         </dependency>
 
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-open-ai</artifactId>
-            <version>1.22.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-elasticsearch</artifactId>
         </dependency>
 
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-cohere</artifactId>
-            <version>1.22.0-beta32</version>
         </dependency>
 
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-web-search-engine-tavily</artifactId>
-            <version>1.22.0-beta32</version>
         </dependency>
 
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-experimental-sql</artifactId>
-            <version>1.22.0-beta32</version>
         </dependency>
 
         <dependency>
@@ -61,18 +67,27 @@
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-embeddings-bge-small-en-v15-q</artifactId>
-            <version>1.22.0-beta32</version>
         </dependency>
 
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-embedding-store-filter-parser-sql</artifactId>
-            <version>1.22.0-beta32</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-community-llm-graph-transformer</artifactId>
+        </dependency>
+        <!-- GraphDocument / GraphNode / GraphEdge are used directly -->
+
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-community-core</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
+            <artifactId>junit-jupiter-api</artifactId>
             <version>5.10.0</version>
         </dependency>
 
@@ -83,11 +98,23 @@
         </dependency>
 
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.20</version>
+        </dependency>
+        <!-- SLF4J implementation, only used at runtime -->
+
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.5.12</version>
         </dependency>
 
-    </dependencies>
+        <dependency>
+            <groupId>co.elastic.clients</groupId>
+            <artifactId>elasticsearch-java</artifactId>
+            <version>9.5.2</version>
+        </dependency>
 
+    </dependencies>
 </project>

@@ -54,8 +54,11 @@ public class _10_Advanced_RAG_SQL_Database_Retreiver_Example {
         DataSource dataSource = createDataSource();
 
         ChatModel chatModel = OpenAiChatModel.builder()
-                .apiKey(OPENAI_API_KEY)
-                .modelName(GPT_4_O_MINI)
+                .baseUrl("https://api.deepseek.com/v1") // 关键：指向 DeepSeek 的 API
+                .apiKey(System.getenv("DEEPSEEK_API_KEY"))
+                .modelName("deepseek-flash")
+                .logRequests(true)
+                .logResponses(true)
                 .build();
 
         ContentRetriever contentRetriever = SqlDatabaseContentRetriever.builder()

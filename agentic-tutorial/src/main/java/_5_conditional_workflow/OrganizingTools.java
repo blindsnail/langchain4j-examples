@@ -33,14 +33,14 @@ public class OrganizingTools {
     }
 
     @Tool
-    public int sendEmail(@P("list of recipient email addresses") List<String> to, @P("list of CC email addresses") List<String> cc, @P("emailsubject") String subject, @P("body") String body){
+    public String sendEmail(@P("list of recipient email addresses") List<String> to, @P("list of CC email addresses") List<String> cc, @P("emailsubject") String subject, @P("body") String body){
         // dummy implementation for demo
         System.out.println("*** EMAIL SENT ***");
         System.out.println("To: " + to);
         System.out.println("Cc: " + cc);
         System.out.println("Subject: " + subject);
         System.out.println("Body: " + body);
-        return 1234; // dummy email ID
+        return "Email sent. ID=1234";
     }
 
     @Tool

@@ -28,7 +28,6 @@ import java.util.Map;
 import static dev.langchain4j.data.document.loader.FileSystemDocumentLoader.loadDocument;
 import static dev.langchain4j.model.openai.OpenAiChatModelName.GPT_4_O_MINI;
 import static java.util.stream.Collectors.joining;
-import static shared.Utils.OPENAI_API_KEY;
 import static shared.Utils.toPath;
 
 public class _01_Low_Level_Naive_RAG_Example {
@@ -73,6 +72,7 @@ public class _01_Low_Level_Naive_RAG_Example {
                 .maxResults(3)
                 .minScore(0.7)
                 .build();
+
         List<EmbeddingMatch<TextSegment>> relevantEmbeddings = embeddingStore.search(embeddingSearchRequest).matches();
 
         // Create a prompt for the model that includes question and relevant embeddings
@@ -97,10 +97,14 @@ public class _01_Low_Level_Naive_RAG_Example {
 
         // Send the prompt to the OpenAI chat model
         ChatModel chatModel = OpenAiChatModel.builder()
-                .apiKey(OPENAI_API_KEY)
-                .modelName(GPT_4_O_MINI)
+                .baseUrl("https://api.deepseek.com/v1") // 关键：指向 DeepSeek 的 API
+                .apiKey(System.getenv("DEEPSEEK_API_KEY"))
+                .modelName("deepseek-flash")
                 .timeout(Duration.ofSeconds(60))
+                .logRequests(true)
+                .logResponses(true)
                 .build();
+
         AiMessage aiMessage = chatModel.chat(prompt.toUserMessage()).aiMessage();
 
         // See an answer from the model

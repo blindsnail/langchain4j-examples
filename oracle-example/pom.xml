@@ -4,6 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>dev.langchain4j</groupId>
+        <artifactId>langchain4j-examples</artifactId>
+        <version>1.22.0-beta32</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
     <groupId>dev.langchain4j</groupId>
     <artifactId>oracle-example</artifactId>
     <version>1.22.0-beta32</version>
@@ -26,13 +33,11 @@
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-oracle</artifactId>
-            <version>1.22.0-beta32</version>
         </dependency>
 
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-embeddings-all-minilm-l6-v2-q</artifactId>
-            <version>1.22.0-beta32</version>
         </dependency>
 
         <dependency>
@@ -42,5 +47,4 @@
         </dependency>
 
     </dependencies>
-
 </project>

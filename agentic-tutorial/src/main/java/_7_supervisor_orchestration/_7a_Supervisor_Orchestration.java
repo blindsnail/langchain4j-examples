@@ -33,9 +33,9 @@ import java.io.IOException;
  */
 public class _7a_Supervisor_Orchestration {
 
-    static {
-        CustomLogging.setLevel(LogLevels.PRETTY, 200);  // control how much you see from the model calls
-    }
+//    static {
+//        CustomLogging.setLevel(LogLevels.PRETTY, 200);  // control how much you see from the model calls
+//    }
 
     private static final ChatModel CHAT_MODEL = ChatModelProvider.createChatModel();
 
@@ -92,7 +92,7 @@ public class _7a_Supervisor_Orchestration {
         // start a timer
         long start = System.nanoTime();
         // 4. Invoke Supervisor with a natural request
-        String result = (String) hiringSupervisor.invoke(
+        String result = hiringSupervisor.invoke(
                 "Evaluate the following candidate:\n" +
                         "Candidate CV:\n" + candidateCv + "\n\n" +
                         "Candidate Contacts:\n" + candidateContact + "\n\n" +

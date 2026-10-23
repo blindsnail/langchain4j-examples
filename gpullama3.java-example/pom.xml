@@ -16,7 +16,6 @@
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <langchain4j.version>1.22.0</langchain4j.version>
     </properties>
 
     <build>
@@ -34,17 +33,17 @@
     </build>
 
     <dependencies>
+
         <!-- GPU-accelerated Llama 3 -->
+
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-gpu-llama3</artifactId>
-            <version>1.22.0-beta32</version>
         </dependency>
 
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-agentic</artifactId>
-            <version>1.22.0-beta32</version>
         </dependency>
 
         <dependency>
@@ -52,5 +51,6 @@
             <artifactId>agentic-tutorial</artifactId>
             <version>1.22.0</version>
         </dependency>
+
     </dependencies>
 </project>

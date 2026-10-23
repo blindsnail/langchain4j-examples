@@ -87,8 +87,9 @@ public class _08_Advanced_RAG_Web_Search_Example {
                 .build();
 
         ChatModel model = OpenAiChatModel.builder()
-                .apiKey(OPENAI_API_KEY)
-                .modelName(GPT_4_O_MINI)
+                .baseUrl("https://api.deepseek.com/v1") // 关键：指向 DeepSeek 的 API
+                .apiKey(System.getenv("DEEPSEEK_API_KEY"))
+                .modelName("deepseek-flash")
                 .build();
 
         return AiServices.builder(Assistant.class)

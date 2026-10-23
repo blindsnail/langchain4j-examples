@@ -25,7 +25,6 @@ import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
 import shared.Assistant;
 
 import static dev.langchain4j.data.document.loader.FileSystemDocumentLoader.loadDocument;
-import static dev.langchain4j.model.openai.OpenAiChatModelName.GPT_4_O_MINI;
 import static shared.Utils.*;
 
 public class _03_Advanced_RAG_with_ReRanking_Example {
@@ -98,8 +97,9 @@ public class _03_Advanced_RAG_with_ReRanking_Example {
                 .build();
 
         ChatModel model = OpenAiChatModel.builder()
-                .apiKey(OPENAI_API_KEY)
-                .modelName(GPT_4_O_MINI)
+                .baseUrl("https://api.deepseek.com/v1") // 关键：指向 DeepSeek 的 API
+                .apiKey(System.getenv("DEEPSEEK_API_KEY"))
+                .modelName("deepseek-flash")
                 .build();
 
         return AiServices.builder(Assistant.class)

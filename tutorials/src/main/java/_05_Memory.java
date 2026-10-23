@@ -1,29 +1,30 @@
 import dev.langchain4j.data.message.AiMessage;
+import dev.langchain4j.examples.shared.DeepSeekTokenCountEstimator;
 import dev.langchain4j.data.message.SystemMessage;
 import dev.langchain4j.data.message.UserMessage;
 import dev.langchain4j.memory.ChatMemory;
 import dev.langchain4j.memory.chat.TokenWindowChatMemory;
+import dev.langchain4j.model.chat.StreamingChatModel;
 import dev.langchain4j.model.chat.response.ChatResponse;
 import dev.langchain4j.model.chat.response.StreamingChatResponseHandler;
 import dev.langchain4j.model.openai.OpenAiStreamingChatModel;
-import dev.langchain4j.model.openai.OpenAiTokenCountEstimator;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import static dev.langchain4j.data.message.UserMessage.userMessage;
-import static dev.langchain4j.model.openai.OpenAiChatModelName.GPT_4_O_MINI;
 
 public class _05_Memory {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
-        OpenAiStreamingChatModel model = OpenAiStreamingChatModel.builder()
-                .apiKey(ApiKeys.OPENAI_API_KEY)
-                .modelName(GPT_4_O_MINI)
+        StreamingChatModel model = OpenAiStreamingChatModel.builder()
+                .baseUrl("https://api.deepseek.com/v1") // 关键：指向 DeepSeek 的 API
+                .apiKey(ApiKeys.DEEPSEEK_API_KEY)
+                .modelName("deepseek-flash")
                 .build();
 
-        ChatMemory chatMemory = TokenWindowChatMemory.withMaxTokens(1000, new OpenAiTokenCountEstimator(GPT_4_O_MINI));
+        ChatMemory chatMemory = TokenWindowChatMemory.withMaxTokens(1000, new DeepSeekTokenCountEstimator());
 
         SystemMessage systemMessage = SystemMessage.from(
                 "You are a senior developer explaining to another senior developer, "
@@ -55,7 +56,7 @@ public class _05_Memory {
         chatMemory.add(aiMessage2);
     }
 
-    private static AiMessage streamChat(OpenAiStreamingChatModel model, ChatMemory chatMemory)
+    private static AiMessage streamChat(StreamingChatModel model, ChatMemory chatMemory)
             throws ExecutionException, InterruptedException {
 
         CompletableFuture<AiMessage> futureAiMessage = new CompletableFuture<>();

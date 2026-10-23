@@ -15,7 +15,6 @@ import java.util.Map;
 
 import static dev.langchain4j.data.message.ChatMessageDeserializer.messagesFromJson;
 import static dev.langchain4j.data.message.ChatMessageSerializer.messagesToJson;
-import static dev.langchain4j.model.openai.OpenAiChatModelName.GPT_4_O_MINI;
 import static org.mapdb.Serializer.INTEGER;
 import static org.mapdb.Serializer.STRING;
 
@@ -37,8 +36,9 @@ public class _09_ServiceWithPersistentMemoryForEachUserExample {
                 .build();
 
         ChatModel model = OpenAiChatModel.builder()
-                .apiKey(ApiKeys.OPENAI_API_KEY)
-                .modelName(GPT_4_O_MINI)
+                .baseUrl("https://api.deepseek.com/v1") // 关键：指向 DeepSeek 的 API
+                .apiKey(ApiKeys.DEEPSEEK_API_KEY)
+                .modelName("deepseek-flash")
                 .build();
 
         Assistant assistant = AiServices.builder(Assistant.class)

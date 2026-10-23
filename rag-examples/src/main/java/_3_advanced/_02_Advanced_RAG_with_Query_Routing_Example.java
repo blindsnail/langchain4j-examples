@@ -79,6 +79,7 @@ public class _02_Advanced_RAG_with_Query_Routing_Example {
         // Let's create a separate embedding store specifically for biographies.
         EmbeddingStore<TextSegment> biographyEmbeddingStore =
                 embed(toPath("documents/biography-of-john-doe.txt"), embeddingModel);
+
         ContentRetriever biographyContentRetriever = EmbeddingStoreContentRetriever.builder()
                 .embeddingStore(biographyEmbeddingStore)
                 .embeddingModel(embeddingModel)
@@ -89,6 +90,7 @@ public class _02_Advanced_RAG_with_Query_Routing_Example {
         // Additionally, let's create a separate embedding store dedicated to terms of use.
         EmbeddingStore<TextSegment> termsOfUseEmbeddingStore =
                 embed(toPath("documents/miles-of-smiles-terms-of-use.txt"), embeddingModel);
+
         ContentRetriever termsOfUseContentRetriever = EmbeddingStoreContentRetriever.builder()
                 .embeddingStore(termsOfUseEmbeddingStore)
                 .embeddingModel(embeddingModel)
@@ -97,8 +99,9 @@ public class _02_Advanced_RAG_with_Query_Routing_Example {
                 .build();
 
         ChatModel chatModel = OpenAiChatModel.builder()
-                .apiKey(OPENAI_API_KEY)
-                .modelName(GPT_4_O_MINI)
+                .baseUrl("https://api.deepseek.com/v1") // 关键：指向 DeepSeek 的 API
+                .apiKey(System.getenv("DEEPSEEK_API_KEY"))
+                .modelName("deepseek-flash")
                 .build();
 
         // Let's create a query router.

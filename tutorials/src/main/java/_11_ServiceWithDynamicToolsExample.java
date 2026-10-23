@@ -4,7 +4,6 @@ import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.AiServices;
 
-import static dev.langchain4j.model.openai.OpenAiChatModelName.GPT_4_O_MINI;
 import static java.time.Duration.ofSeconds;
 
 public class _11_ServiceWithDynamicToolsExample {
@@ -16,11 +15,12 @@ public class _11_ServiceWithDynamicToolsExample {
 
     public static void main(String[] args) {
 
-        Judge0JavaScriptExecutionTool judge0Tool = new Judge0JavaScriptExecutionTool(ApiKeys.RAPID_API_KEY);
+        Judge0JavaScriptExecutionTool judge0Tool = new Judge0JavaScriptExecutionTool("2ac4d75b70mshb0724279891f459p1ef21ejsnee9e80da9706");
 
         ChatModel chatModel = OpenAiChatModel.builder()
-                .apiKey(ApiKeys.OPENAI_API_KEY)
-                .modelName(GPT_4_O_MINI)
+                .baseUrl("https://api.deepseek.com/v1") // 关键：指向 DeepSeek 的 API
+                .apiKey(ApiKeys.DEEPSEEK_API_KEY)
+                .modelName("deepseek-flash")
                 .temperature(0.0)
                 .timeout(ofSeconds(60))
                 .build();

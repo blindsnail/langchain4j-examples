@@ -54,13 +54,10 @@ public class _3b_Loop_Agent_Example_States_And_Fail {
         UntypedAgent reviewedCvGenerator = AgenticServices // use UntypedAgent unless you define the resulting composed agent, see below
                 .loopBuilder().subAgents(cvReviewer, scoredCvTailor) // this can be as many as you want, order matters
                 .outputKey("cvAndReview") // this is the final output we want to observe
-                .output(agenticScope -> {
-                    Map<String, Object> cvAndReview = Map.of(
-                            "cv", agenticScope.readState("cv"),
-                            "finalReview", agenticScope.readState("cvReview")
-                    );
-                    return cvAndReview;
-                })
+                .output(agenticScope -> Map.of(
+                        "cv", agenticScope.readState("cv"),
+                        "finalReview", agenticScope.readState("cvReview")
+                ))
                 .exitCondition(scope -> {
                     CvReview review = (CvReview) scope.readState("cvReview");
                     reviewHistory.add(review); // capture the score+feedback at every agent invocation
